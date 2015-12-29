@@ -1,0 +1,168 @@
+@mixin scale($unit:1) {
+  transform: scale($unit);
+}
+
+@mixin color($name) {
+  color: $name;
+}
+
+%hoverAnimated {
+  transition: color .5s, box-shadow 1s, transform 1s;
+  &:hover {
+    opacity: 1;
+    box-shadow: 1px 0px 3px 1px white;
+    @include scale(.95);
+    @include color(yellow);
+  }
+}
+
+.item {
+  opacity: .5;
+  list-style: none;
+  text-transform: capitalize;
+  margin: .5rem .2rem;
+}
+
+body {
+  background-color: rgb(17, 63, 120);
+  margin: 5vh;
+  height: 90vh;
+}
+
+.container {
+  .list-post {
+    display: inline-block;
+    background-color: rgb(254, 254, 254);
+    width: 30%;
+
+    &-section {
+      padding: 0;
+      margin: 0;
+
+      &-item {
+        @extend .item;
+        height: 50px;
+
+        font-size: 2rem;
+        font-weight: bold;
+        text-align: center;
+
+        color: rgb(42, 51, 45);
+        @extend %hoverAnimated;
+      }
+    }
+  }
+
+  .section-post {
+    display: inline-block;
+    background-color: rgb(126, 129, 115);
+    color: white;
+    width: 70%;
+
+    &-item {
+      @extend .item;
+      padding: 10px 5px;
+      padding-top: 20px;
+      border-bottom: solid 1px white;
+
+      @extend %hoverAnimated;
+    }
+  }
+
+  .list-post,
+  .section-post {
+    border-radius: 4px;
+    vertical-align: top;
+    height: 80vh;
+    min-height: 600px;
+    overflow-x: auto;
+    transition: .2s;
+    transform-origin: center;
+  }
+
+}
+
+
+
+
+
+
+
+@keyframes girar {
+  0% {
+    transform: rotate(0);
+  }
+  50% {
+    border-width: 1px;
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+
+
+@mixin circle($value:50px, $colorIn:red, $colorOut: yellow, $velocity: 1s, $direction: normal) {
+  display: inline-block;
+  height: $value;
+  width: $value;
+  background: transparent;
+  border: $value/10 solid $colorIn;
+  border-radius: $value;
+  border-right-color: transparent;
+
+  animation: girar $velocity infinite cubic-bezier(0,0,0,0);
+  animation-direction: $direction;
+  animation-fill-mode: forwards;
+
+  transition: all $velocity;
+  &:hover {
+    border-color: $colorOut;
+    border-right-color: transparent;
+  }
+}
+
+.circles {
+  text-align: center;
+  min-height: 300px;
+  $margin-left: 40px;
+
+  .circle {
+    @include circle(100px);
+    margin-left: $margin-left;
+
+    &-blue {
+      @include circle($value: 200px, $colorIn: blue, $velocity: 2s, $direction: reverse);
+      margin-left: $margin-left;
+    }
+    &-green {
+      @include circle($value: 200px, $colorIn: green, $velocity: .8s);
+      margin-left: $margin-left;
+    }
+  }
+}
+
+
+.diamant {
+  display: inline-block;
+
+  border-style: solid;
+  border-color: transparent transparent red transparent;
+  border-width: 0 25px 25px 25px;
+  height: 0;
+  width: 50px;
+  position: relative;
+  margin: 20px 0 50px 0;
+
+  &:after {
+    content: "";
+    position: absolute;
+    top: 25px;
+    left: -25px;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-color: red transparent transparent transparent;
+    border-width: 70px 50px 0 50px;
+  }
+}
