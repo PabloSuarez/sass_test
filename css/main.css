@@ -130,3 +130,57 @@ body {
     border-style: solid;
     border-color: red transparent transparent transparent;
     border-width: 70px 50px 0 50px; }
+
+.price {
+  position: relative; }
+  .price:before {
+    content: '$';
+    position: relative;
+    left: 0; }
+
+.USD .price:before {
+  content: '$'; }
+
+.EUR .price:before {
+  content: '\20AC'; }
+
+.ILS .price:before {
+  content: '\20AA'; }
+
+.GBP .price:before {
+  content: '\00A3'; }
+
+@keyframes alertMe {
+  from {
+    border-width: 3px;
+    border-color: gold; }
+  to {
+    border-width: 0;
+    border-color: rgba(255, 215, 0, 0.1); } }
+
+.alert {
+  position: relative;
+  width: 130px;
+  color: yellow; }
+  .alert:before {
+    content: '';
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    height: 8px;
+    width: 8px;
+    border-radius: 10px;
+    background-color: gold; }
+  .alert:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 20px;
+    width: 20px;
+    border-radius: 20px;
+    background-color: transparent;
+    border: solid gold;
+    border-width: 2px;
+    box-sizing: border-box;
+    animation: alertMe 1s infinite; }
